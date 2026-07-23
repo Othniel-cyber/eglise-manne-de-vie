@@ -207,10 +207,11 @@
             text-decoration: none;
             font-size: 0.85rem;
             font-weight: 500;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 0.8rem;
             border-radius: 8px;
             transition: all 0.3s;
             position: relative;
+            white-space: nowrap;
         }
         .nav-links a::before {
             content: '';
@@ -1460,9 +1461,6 @@
             .footer-grid {
                 grid-template-columns: 1fr 1fr;
             }
-        }
-
-        @media (max-width: 768px) {
             .nav-links {
                 position: fixed;
                 top: 72px;
@@ -1486,10 +1484,17 @@
                 width: 100%;
                 padding: 0.8rem 1rem;
                 font-size: 0.95rem;
+                white-space: normal;
+            }
+            .nav-links a::before {
+                display: none;
             }
             .hamburger {
                 display: flex;
             }
+        }
+
+        @media (max-width: 768px) {
             .hero-content h1 {
                 font-size: 2.2rem;
             }
