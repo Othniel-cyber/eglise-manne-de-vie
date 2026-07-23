@@ -1449,6 +1449,29 @@
         }
 
         @media (max-width: 968px) {
+            .navbar {
+                padding: 0 1.2rem;
+                height: 64px;
+            }
+            .navbar .logo-icon {
+                width: 30px;
+                height: 30px;
+            }
+            .navbar .logo-icon::before {
+                width: 14px;
+                height: 2px;
+            }
+            .navbar .logo-icon::after {
+                height: 14px;
+                width: 2px;
+            }
+            .navbar .logo-text {
+                font-size: 1.1rem;
+            }
+            .navbar .logo-text small {
+                font-size: 0.45rem;
+                letter-spacing: 1px;
+            }
             .about-grid,
             .pastor-content,
             .contact-grid {
@@ -1463,18 +1486,18 @@
             }
             .nav-links {
                 position: fixed;
-                top: 72px;
+                top: 64px;
                 left: 0;
                 right: 0;
                 background: rgba(26, 26, 46, 0.98);
                 backdrop-filter: blur(16px);
                 flex-direction: column;
-                padding: 1.5rem;
-                gap: 0.3rem;
+                padding: 1rem 1.2rem;
+                gap: 0.2rem;
                 transform: translateY(-120%);
                 transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
                 border-bottom: 2px solid var(--gold);
-                max-height: calc(100vh - 72px);
+                max-height: calc(100vh - 64px);
                 overflow-y: auto;
             }
             .nav-links.open {
@@ -1482,9 +1505,10 @@
             }
             .nav-links a {
                 width: 100%;
-                padding: 0.8rem 1rem;
+                padding: 0.7rem 0.8rem;
                 font-size: 0.95rem;
                 white-space: normal;
+                text-align: left;
             }
             .nav-links a::before {
                 display: none;
@@ -1495,6 +1519,15 @@
         }
 
         @media (max-width: 768px) {
+            .navbar {
+                padding: 0 0.8rem;
+            }
+            .navbar .logo-text {
+                font-size: 1rem;
+            }
+            .navbar .logo-text small {
+                display: none;
+            }
             .hero-content h1 {
                 font-size: 2.2rem;
             }
@@ -1554,14 +1587,27 @@
 
         @media (max-width: 480px) {
             .navbar {
-                padding: 0 1rem;
-                height: 64px;
+                padding: 0 0.6rem;
+                height: 56px;
             }
             .navbar .logo-text {
-                font-size: 1.05rem;
+                font-size: 0.9rem;
             }
-            .navbar .logo-text small {
-                font-size: 0.5rem;
+            .navbar .logo-icon {
+                width: 26px;
+                height: 26px;
+            }
+            .navbar .logo-icon::before {
+                width: 12px;
+                height: 2px;
+            }
+            .navbar .logo-icon::after {
+                height: 12px;
+                width: 2px;
+            }
+            .nav-links {
+                top: 56px;
+                max-height: calc(100vh - 56px);
             }
             .hero-content h1 {
                 font-size: 1.7rem;
