@@ -1510,6 +1510,9 @@
             }
             .programs-grid {
                 grid-template-columns: 1fr;
+                max-width: 450px;
+                margin-left: auto;
+                margin-right: auto;
             }
             .partner-card {
                 min-width: 100%;
@@ -1539,6 +1542,9 @@
                 min-width: auto;
                 width: 100%;
             }
+            .country-dropdown {
+                width: 280px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1547,7 +1553,10 @@
                 height: 64px;
             }
             .navbar .logo-text {
-                font-size: 1.1rem;
+                font-size: 1.05rem;
+            }
+            .navbar .logo-text small {
+                font-size: 0.5rem;
             }
             .hero-content h1 {
                 font-size: 1.7rem;
@@ -1555,15 +1564,83 @@
             .hero-content .slogan {
                 font-size: 1rem;
             }
+            .hero-badge {
+                font-size: 0.7rem;
+                padding: 0.4rem 1rem;
+            }
             .hero-buttons .btn {
-                padding: 0.7rem 1.4rem;
-                font-size: 0.82rem;
+                padding: 0.65rem 1.2rem;
+                font-size: 0.78rem;
             }
             .about-image-wrapper img {
                 height: 280px;
             }
             .pastor-image img {
                 height: 320px;
+            }
+            .hero-stats {
+                gap: 1rem;
+            }
+            .hero-stat .number {
+                font-size: 1.2rem;
+            }
+            .hero-stat .label {
+                font-size: 0.65rem;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            section {
+                padding: 2.5rem 1rem;
+            }
+            .program-card {
+                padding: 2rem 1.2rem;
+            }
+            .program-card .time-display {
+                font-size: 1.5rem;
+            }
+            .about-text h2 {
+                font-size: 1.4rem;
+            }
+            .pastor-info h2 {
+                font-size: 1.5rem;
+            }
+            .partner-card {
+                padding: 2rem 1.5rem;
+                min-width: 100%;
+            }
+            .contact-form-wrapper {
+                padding: 1.2rem;
+            }
+            .contact-item {
+                padding: 0.6rem;
+            }
+            .contact-item .ci-icon {
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+            }
+            .contact-item .ci-icon svg {
+                width: 18px;
+                height: 18px;
+            }
+            .country-code-btn {
+                min-width: 70px;
+                padding: 0.7rem 0.5rem;
+                font-size: 0.8rem;
+            }
+            .country-dropdown {
+                width: 260px;
+            }
+            .modal-box {
+                padding: 1.5rem;
+            }
+            .footer-grid {
+                gap: 1.5rem;
+            }
+            .btn {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -1612,7 +1689,7 @@
         </div>
         <h1>LA MANNE DE <span class="gold">VIE</span></h1>
         <div class="hero-subtitle-line"></div>
-        <p class="slogan">Â« <strong>Porteurs de la Bonne Nouvelle</strong> Â»</p>
+        <p class="slogan">" <strong>Porteurs de la Bonne Nouvelle</strong> "</p>
         <p>Un lieu ou la parole de Dieu transforme des vies. Ensemble, grandissons dans la foi, l'esperance et l'amour, annoncant la Bonne Nouvelle de Jesus-Christ a Porto-Novo et au-dela.</p>
         <div class="hero-buttons">
             <a href="#programmes" class="btn btn-primary">
@@ -1717,7 +1794,7 @@
             </div>
             <h3>Culte du Dimanche</h3>
             <p class="day-name">Dimanche</p>
-            <div class="time-display">08h â€” 10h</div>
+            <div class="time-display">08h - 10h</div>
             <p class="activity-desc">Culte de louange, d'adoration et d'enseignement de la parole</p>
         </div>
         <div class="program-card reveal">
@@ -1727,7 +1804,7 @@
             </div>
             <h3>Soiree de Priere</h3>
             <p class="day-name">Jeudi</p>
-            <div class="time-display">19h â€” 20h</div>
+            <div class="time-display">19h - 20h</div>
             <p class="activity-desc">Intercession, priere collective et combat spirituel</p>
         </div>
         <div class="program-card reveal">
@@ -1759,7 +1836,7 @@
         <div class="pastor-info reveal">
             <h2>Pasteur de LA MANNE DE VIE</h2>
             <p class="pastor-role">Serviteur de Dieu | Predicateur de la Bonne Nouvelle</p>
-            <p class="pastor-verse">Â« Allez par tout le monde, et prechez la bonne nouvelle a toute la creation. Â» â€” Marc 16:15</p>
+            <p class="pastor-verse">" Allez par tout le monde, et prechez la bonne nouvelle a toute la creation. " - Marc 16:15</p>
             <p>Le pasteur est un homme appele par Dieu pour annoncer la Bonne Nouvelle et conduire le troupeau du Seigneur. Avec amour et devouement, il enseigne la parole de Dieu et accompagne chaque membre dans son cheminement spirituel.</p>
             <p>Vous souhaitez echanger avec lui, recevoir des conseils ou une priere ? N'hesitez pas a le contacter directement. Il est la pour vous ecouter, vous conseiller et prier avec vous.</p>
             <div class="pastor-contact-buttons">
@@ -1859,6 +1936,7 @@
                 <div class="ci-text">
                     <h4>WhatsApp</h4>
                     <p><a href="https://wa.me/2290197573929" target="_blank">+229 01 97 57 39 29</a></p>
+                    <p><a href="https://wa.me/2290166747892" target="_blank">+229 01 66 74 78 92</a></p>
                 </div>
             </div>
             <div class="contact-item">
@@ -1939,7 +2017,7 @@
                 <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             </div>
             <h3>LA MANNE DE VIE</h3>
-            <p>Benin / Porto-Novo â€” Sohomey</p>
+            <p>Benin / Porto-Novo - Sohomey</p>
             <p style="margin-top:0.8rem;font-size:0.85rem;opacity:0.6;">Venez nous rendre visite !</p>
         </div>
     </div>
@@ -1987,7 +2065,7 @@
     <div class="footer-grid">
         <div>
             <div class="footer-brand">LA MANNE DE VIE <small>Porteurs de la Bonne Nouvelle</small></div>
-            <p>Benin / Porto-Novo â€” Sohomey<br>Â« Allez par tout le monde, et prechez la bonne nouvelle a toute la creation. Â» â€” Marc 16:15</p>
+            <p>Benin / Porto-Novo - Sohomey<br>" Allez par tout le monde, et prechez la bonne nouvelle a toute la creation. " - Marc 16:15</p>
         </div>
         <div>
             <h4>Liens</h4>
@@ -2010,7 +2088,7 @@
         </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; 2026 LA MANNE DE VIE â€” Tous droits reserves. | Â« Porteurs de la Bonne Nouvelle Â»</p>
+        <p>&copy; 2026 LA MANNE DE VIE - Tous droits reserves. | " Porteurs de la Bonne Nouvelle "</p>
     </div>
 </footer>
 
