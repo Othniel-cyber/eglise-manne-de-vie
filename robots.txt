@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://othniel-cyber.github.io/eglise-manne-de-vie/sitemap.xml
