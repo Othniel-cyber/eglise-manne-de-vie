@@ -1,0 +1,2389 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LA MANNE DE VIE | Ã‰glise ChrÃ©tienne</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #C9A84C;
+            --gold-light: #E8D48B;
+            --gold-dark: #A8882E;
+            --dark: #1A1A2E;
+            --dark2: #16213E;
+            --dark3: #0F3460;
+            --cream: #FFF8E7;
+            --white: #FFFFFF;
+            --text: #2D2D2D;
+            --text-light: #6B6B6B;
+            --shadow: 0 20px 60px rgba(0,0,0,0.08);
+            --shadow-hover: 0 30px 80px rgba(0,0,0,0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: var(--cream);
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ===== PRELOADER ===== */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            transition: opacity 0.7s ease, visibility 0.7s ease;
+        }
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .preloader-content {
+            text-align: center;
+        }
+        .preloader-cross {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            position: relative;
+            animation: preloaderPulse 1.4s ease-in-out infinite;
+        }
+        .preloader-cross::before,
+        .preloader-cross::after {
+            content: '';
+            position: absolute;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+        .preloader-cross::before {
+            width: 100%;
+            height: 8px;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+        .preloader-cross::after {
+            height: 100%;
+            width: 8px;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+        }
+        @keyframes preloaderPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.15); opacity: 0.7; }
+        }
+        .preloader-name {
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            letter-spacing: 3px;
+        }
+        .preloader-bar {
+            width: 200px;
+            height: 2px;
+            background: rgba(201,168,76,0.2);
+            margin: 15px auto 0;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .preloader-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--gold);
+            animation: preloaderFill 1.2s ease forwards;
+        }
+        @keyframes preloaderFill {
+            to { width: 100%; }
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10000;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 0 2.5rem;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--gold);
+            transition: background 0.4s, box-shadow 0.4s;
+        }
+        .navbar.scrolled {
+            background: rgba(26, 26, 46, 0.98);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+        .navbar .logo-link {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+        }
+        .navbar .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .navbar .logo-icon::before,
+        .navbar .logo-icon::after {
+            content: '';
+            position: absolute;
+            background: var(--dark);
+            border-radius: 1px;
+        }
+        .navbar .logo-icon::before {
+            width: 18px;
+            height: 3px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .navbar .logo-icon::after {
+            height: 18px;
+            width: 3px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .navbar .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.1;
+        }
+        .navbar .logo-text span {
+            color: var(--gold);
+        }
+        .navbar .logo-text small {
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.55rem;
+            font-weight: 400;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 0.2rem;
+            align-items: center;
+        }
+        .nav-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::before,
+        .nav-links a.active::before {
+            width: 60%;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--gold);
+            background: rgba(201,168,76,0.08);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 6px;
+            z-index: 10001;
+        }
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 2px;
+            transition: all 0.35s;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 45%, var(--dark3) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat 6s ease-in-out infinite;
+        }
+        @keyframes particleFloat {
+            0% { opacity: 0; transform: translateY(0) scale(0); }
+            20% { opacity: 0.6; }
+            80% { opacity: 0.6; }
+            100% { opacity: 0; transform: translateY(-200px) scale(1); }
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(transparent, var(--cream));
+            pointer-events: none;
+        }
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(201,168,76,0.12);
+            border: 1px solid rgba(201,168,76,0.25);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            color: var(--gold-light);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(4px);
+        }
+        .hero-badge .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: dotPulse 2s infinite;
+        }
+        @keyframes dotPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.15;
+            margin-bottom: 0.3rem;
+        }
+        .hero-content h1 .gold {
+            color: var(--gold);
+        }
+        .hero-subtitle-line {
+            width: 80px;
+            height: 3px;
+            background: var(--gold);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+        .hero-content .slogan {
+            font-size: 1.35rem;
+            color: var(--gold-light);
+            font-weight: 300;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        .hero-content .slogan strong {
+            font-style: normal;
+            font-weight: 600;
+            color: var(--gold);
+        }
+        .hero-content p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .btn:hover::after {
+            opacity: 1;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--dark);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(201, 168, 76, 0.35);
+        }
+        .btn-outline {
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            background: transparent;
+        }
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #1DA851);
+            color: white;
+        }
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(37, 211, 102, 0.35);
+        }
+        .btn-phone {
+            background: linear-gradient(135deg, #0077B6, #005f8a);
+            color: white;
+        }
+        .btn-phone:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 119, 182, 0.35);
+        }
+        .btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        .hero-stat {
+            text-align: center;
+        }
+        .hero-stat .number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+            display: block;
+        }
+        .hero-stat .label {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* ===== SECTION COMMON ===== */
+        section {
+            padding: 5.5rem 2rem;
+            position: relative;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: var(--dark);
+            text-align: center;
+            margin-bottom: 0.3rem;
+        }
+        .section-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin: 0.8rem auto 1rem;
+        }
+        .section-divider .line {
+            width: 40px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+        .section-divider .diamond {
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            transform: rotate(45deg);
+        }
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 3.5rem;
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Scroll reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== ABOUT ===== */
+        .about {
+            background: var(--white);
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+        .about-image-wrapper {
+            position: relative;
+        }
+        .about-image-wrapper .img-frame {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        .about-image-wrapper .img-frame::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(26,26,46,0.8), transparent 50%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        .about-image-wrapper img {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            transition: transform 0.8s;
+        }
+        .about-image-wrapper:hover img {
+            transform: scale(1.04);
+        }
+        .about-image-wrapper .img-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            z-index: 2;
+            color: var(--white);
+        }
+        .about-image-wrapper .img-caption h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--gold);
+        }
+        .about-image-wrapper .img-caption p {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+        .about-image-wrapper .img-badge {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            background: var(--gold);
+            color: var(--dark);
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 3;
+            box-shadow: 0 4px 15px rgba(201,168,76,0.3);
+        }
+        .about-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        .about-text .about-highlight {
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+        .about-text p {
+            color: var(--text-light);
+            line-height: 1.9;
+            margin-bottom: 1rem;
+            font-size: 0.98rem;
+        }
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .about-features .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1rem;
+            background: rgba(201,168,76,0.06);
+            border-radius: 12px;
+            transition: background 0.3s;
+        }
+        .about-features .feature-item:hover {
+            background: rgba(201,168,76,0.12);
+        }
+        .about-features .feature-item .fi-icon {
+            width: 36px;
+            height: 36px;
+            min-width: 36px;
+            background: rgba(201,168,76,0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .about-features .feature-item .fi-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--gold);
+        }
+        .about-features .feature-item span {
+            font-size: 0.92rem;
+            font-weight: 500;
+        }
+
+        /* ===== PROGRAMS ===== */
+        .programs {
+            background: var(--cream);
+        }
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .program-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2.8rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid rgba(201,168,76,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s;
+        }
+        .program-card:hover::before {
+            transform: scaleX(1);
+        }
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        .program-card .card-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1.2rem;
+            background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(201,168,76,0.06));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        .program-card:hover .card-icon {
+            background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.1));
+        }
+        .program-card .card-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--gold);
+        }
+        .program-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+        }
+        .program-card .day-name {
+            color: var(--gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+        .program-card .time-display {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        .program-card .activity-desc {
+            color: var(--text-light);
+            margin-top: 0.8rem;
+            font-size: 0.92rem;
+        }
+        .program-card .card-accent {
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 80px;
+            height: 80px;
+            background: rgba(201,168,76,0.05);
+            border-radius: 50%;
+        }
+
+        /* ===== PASTOR ===== */
+        .pastor {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 100%);
+            color: var(--white);
+        }
+        .pastor .section-title {
+            color: var(--white);
+        }
+        .pastor .section-subtitle {
+            color: rgba(255,255,255,0.6);
+        }
+        .pastor-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+        .pastor-image {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            border: 3px solid var(--gold);
+            position: relative;
+        }
+        .pastor-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(26,26,46,0.4), transparent 50%);
+            pointer-events: none;
+        }
+        .pastor-image img {
+            width: 100%;
+            height: 520px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.8s;
+        }
+        .pastor-image:hover img {
+            transform: scale(1.04);
+        }
+        .pastor-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+        }
+        .pastor-info .pastor-role {
+            color: var(--gold-light);
+            font-weight: 500;
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 0.3rem;
+        }
+        .pastor-info .pastor-verse {
+            color: rgba(255,255,255,0.4);
+            font-style: italic;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+        .pastor-info p {
+            color: rgba(255,255,255,0.75);
+            line-height: 1.9;
+            margin-bottom: 1rem;
+            font-size: 0.98rem;
+        }
+        .pastor-contact-buttons {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        /* ===== PARTNERS ===== */
+        .partners {
+            background: var(--cream);
+        }
+        .partners-grid {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 3rem;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .partner-card {
+            background: var(--white);
+            padding: 3rem 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            flex: 1;
+            min-width: 300px;
+            max-width: 450px;
+            transition: all 0.4s;
+            border: 1px solid rgba(201,168,76,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        .partner-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s;
+        }
+        .partner-card:hover::before {
+            transform: scaleX(1);
+        }
+        .partner-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+        .partner-logo {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        .partner-logo svg {
+            height: 100%;
+            max-width: 100%;
+        }
+        .partner-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+        }
+        .partner-card .partner-fullname {
+            font-size: 0.82rem;
+            color: var(--gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+        .partner-card p {
+            color: var(--text-light);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact {
+            background: var(--white);
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .contact-info-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+        }
+        .contact-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+            padding: 1rem;
+            border-radius: 12px;
+            transition: background 0.3s;
+        }
+        .contact-item:hover {
+            background: rgba(201,168,76,0.06);
+        }
+        .contact-item .ci-icon {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            background: rgba(201,168,76,0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .contact-item .ci-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--gold);
+        }
+        .contact-item .ci-text h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.15rem;
+        }
+        .contact-item .ci-text p,
+        .contact-item .ci-text a {
+            color: var(--text);
+            text-decoration: none;
+            line-height: 1.6;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .contact-item .ci-text a:hover {
+            color: var(--gold);
+        }
+
+        .contact-form-wrapper {
+            background: var(--cream);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+        .contact-form-wrapper h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            font-size: 0.82rem;
+            color: var(--text);
+            margin-bottom: 0.4rem;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 2px solid #E8E0D0;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
+            background: var(--white);
+            color: var(--text);
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(201,168,76,0.1);
+        }
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .contact-form-wrapper .btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* ===== COUNTRY CODE PHONE INPUT ===== */
+        .phone-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: stretch;
+        }
+        .country-code-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.85rem 0.8rem;
+            background: var(--white);
+            border: 2px solid #E8E0D0;
+            border-right: none;
+            border-radius: 12px 0 0 12px;
+            cursor: pointer;
+            transition: border-color 0.3s;
+            white-space: nowrap;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            min-width: 90px;
+            position: relative;
+            z-index: 2;
+        }
+        .phone-input-wrapper:focus-within .country-code-btn {
+            border-color: var(--gold);
+        }
+        .country-code-btn .flag-icon {
+            width: 22px;
+            height: 16px;
+            border-radius: 2px;
+            object-fit: cover;
+            display: block;
+        }
+        .country-code-btn .code-text {
+            font-weight: 600;
+            color: var(--text);
+        }
+        .country-code-btn .arrow-down {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid var(--text-light);
+            transition: transform 0.3s;
+            margin-left: 2px;
+        }
+        .country-code-btn.active .arrow-down {
+            transform: rotate(180deg);
+        }
+        .phone-input-wrapper .phone-number-input {
+            flex: 1;
+            border-radius: 0 12px 12px 0 !important;
+            border-left: none !important;
+        }
+        .phone-number-input:focus {
+            border-left: none !important;
+        }
+
+        .country-dropdown {
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 0;
+            width: 320px;
+            max-height: 280px;
+            overflow-y: auto;
+            background: var(--white);
+            border: 2px solid #E8E0D0;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: none;
+            animation: dropdownSlide 0.2s ease;
+        }
+        .country-dropdown.open {
+            display: block;
+        }
+        @keyframes dropdownSlide {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .country-dropdown .dropdown-search {
+            padding: 0.6rem;
+            border-bottom: 1px solid #E8E0D0;
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            border-radius: 12px 12px 0 0;
+        }
+        .country-dropdown .dropdown-search input {
+            width: 100%;
+            padding: 0.6rem 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+            background: #f9f9f9;
+            outline: none;
+        }
+        .country-dropdown .dropdown-search input:focus {
+            border-color: var(--gold);
+        }
+        .country-dropdown .country-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.65rem 0.8rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 0.88rem;
+        }
+        .country-dropdown .country-option:hover {
+            background: rgba(201,168,76,0.1);
+        }
+        .country-dropdown .country-option.selected {
+            background: rgba(201,168,76,0.15);
+            font-weight: 600;
+        }
+        .country-dropdown .country-option .flag-icon {
+            width: 22px;
+            height: 16px;
+            border-radius: 2px;
+            object-fit: cover;
+        }
+        .country-dropdown .country-option .country-name {
+            flex: 1;
+            color: var(--text);
+        }
+        .country-dropdown .country-option .country-code {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        .country-dropdown::-webkit-scrollbar {
+            width: 6px;
+        }
+        .country-dropdown::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .country-dropdown::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 3px;
+        }
+
+        /* ===== MAP ===== */
+        .map-section {
+            padding: 0;
+            height: 380px;
+            position: relative;
+        }
+        .map-fallback {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background: linear-gradient(135deg, var(--dark), var(--dark2));
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .map-fallback::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 L55 30 L30 55 L5 30 Z' fill='none' stroke='rgba(201,168,76,0.06)' stroke-width='1'/%3E%3C/svg%3E") repeat;
+            pointer-events: none;
+        }
+        .map-fallback .map-marker-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 1rem;
+            animation: mapBounce 2s ease-in-out infinite;
+        }
+        @keyframes mapBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .map-fallback .map-marker-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--gold);
+        }
+        .map-fallback h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+        }
+        .map-fallback p {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--dark);
+            color: rgba(255,255,255,0.6);
+            padding: 4rem 2rem 1.5rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+        .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+        .footer-brand small {
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 400;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        .footer-grid p {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-top: 0.5rem;
+        }
+        .footer-grid h4 {
+            color: var(--white);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+        .footer-grid ul {
+            list-style: none;
+        }
+        .footer-grid ul li {
+            margin-bottom: 0.5rem;
+        }
+        .footer-grid ul a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        .footer-grid ul a:hover {
+            color: var(--gold);
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 1.5rem;
+            text-align: center;
+            font-size: 0.82rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: rgba(0,0,0,0.65);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-box {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 2.5rem;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            animation: modalSlide 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.3);
+        }
+        @keyframes modalSlide {
+            from { transform: translateY(30px) scale(0.95); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.3s;
+            color: var(--text-light);
+        }
+        .modal-close:hover {
+            background: rgba(0,0,0,0.06);
+            color: var(--text);
+        }
+        .modal-close svg {
+            width: 20px;
+            height: 20px;
+        }
+        .modal-box h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+        }
+        .modal-box .modal-desc {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .modal-box .modal-desc strong {
+            color: var(--gold);
+        }
+        .modal-box .form-group {
+            margin-bottom: 1rem;
+        }
+        .modal-box .btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* ===== TOAST ===== */
+        .toast-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 999999;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .toast {
+            background: var(--dark);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 14px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transform: translateX(120%);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            min-width: 300px;
+        }
+        .toast.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        .toast.toast-success {
+            background: #1DA851;
+        }
+        .toast.toast-error {
+            background: #e74c3c;
+        }
+        .toast .toast-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+        .toast .toast-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: white;
+        }
+
+        /* ===== BACK TO TOP ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            width: 48px;
+            height: 48px;
+            background: var(--gold);
+            color: var(--dark);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.35s;
+            box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .back-to-top:hover {
+            background: var(--gold-light);
+            transform: translateY(-3px);
+        }
+        .back-to-top svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .programs-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 968px) {
+            .about-grid,
+            .pastor-content,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: rgba(26, 26, 46, 0.98);
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                padding: 1.5rem;
+                gap: 0.3rem;
+                transform: translateY(-120%);
+                transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                border-bottom: 2px solid var(--gold);
+                max-height: calc(100vh - 72px);
+                overflow-y: auto;
+            }
+            .nav-links.open {
+                transform: translateY(0);
+            }
+            .nav-links a {
+                width: 100%;
+                padding: 0.8rem 1rem;
+                font-size: 0.95rem;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .hero-stats {
+                gap: 1.5rem;
+            }
+            .hero-stat .number {
+                font-size: 1.5rem;
+            }
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+            .about-image-wrapper img {
+                height: 350px;
+            }
+            .pastor-image img {
+                height: 400px;
+            }
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            .partner-card {
+                min-width: 100%;
+            }
+            section {
+                padding: 3.5rem 1.2rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .contact-form-wrapper {
+                padding: 1.8rem;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .toast-container {
+                left: 1rem;
+                right: 1rem;
+                bottom: 1rem;
+            }
+            .toast {
+                min-width: auto;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0 1rem;
+                height: 64px;
+            }
+            .navbar .logo-text {
+                font-size: 1.1rem;
+            }
+            .hero-content h1 {
+                font-size: 1.7rem;
+            }
+            .hero-content .slogan {
+                font-size: 1rem;
+            }
+            .hero-buttons .btn {
+                padding: 0.7rem 1.4rem;
+                font-size: 0.82rem;
+            }
+            .about-image-wrapper img {
+                height: 280px;
+            }
+            .pastor-image img {
+                height: 320px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== PRELOADER ===== -->
+<div class="preloader" id="preloader">
+    <div class="preloader-content">
+        <div class="preloader-cross"></div>
+        <div class="preloader-name">LA MANNE DE VIE</div>
+        <div class="preloader-bar">
+            <div class="preloader-bar-fill"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar" id="navbar">
+    <a href="#accueil" class="logo-link">
+        <div class="logo-icon"></div>
+        <div class="logo-text">LA MANNE DE <span>VIE</span><small>Porteurs de la Bonne Nouvelle</small></div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#accueil" class="active">Accueil</a></li>
+        <li><a href="#a-propos">A Propos</a></li>
+        <li><a href="#programmes">Programmes</a></li>
+        <li><a href="#pasteur">Pasteur</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#partenaires">Partenaires</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="accueil">
+    <div class="hero-particles" id="particles"></div>
+    <div class="hero-content">
+        <div class="hero-badge">
+            <span class="dot"></span>
+            Bienvenue a l'Eglise
+        </div>
+        <h1>LA MANNE DE <span class="gold">VIE</span></h1>
+        <div class="hero-subtitle-line"></div>
+        <p class="slogan">Â« <strong>Porteurs de la Bonne Nouvelle</strong> Â»</p>
+        <p>Un lieu ou la parole de Dieu transforme des vies. Ensemble, grandissons dans la foi, l'esperance et l'amour, annoncant la Bonne Nouvelle de Jesus-Christ a Porto-Novo et au-dela.</p>
+        <div class="hero-buttons">
+            <a href="#programmes" class="btn btn-primary">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z"/></svg>
+                Nos Programmes
+            </a>
+            <a href="#contact" class="btn btn-outline">
+                <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/></svg>
+                Nous Contacter
+            </a>
+            <a href="https://wa.me/2290197573929" target="_blank" class="btn btn-whatsapp">
+                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                WhatsApp
+            </a>
+        </div>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <span class="number" data-count="15">0</span>
+                <span class="label">Annees de Ministere</span>
+            </div>
+            <div class="hero-stat">
+                <span class="number">3</span>
+                <span class="label">Programmes Hebdo</span>
+            </div>
+            <div class="hero-stat">
+                <span class="number">2</span>
+                <span class="label">Partenaires</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== A PROPOS ===== -->
+<section class="about" id="a-propos">
+    <h2 class="section-title reveal">A Propos de Nous</h2>
+    <div class="section-divider reveal">
+        <span class="line"></span>
+        <span class="diamond"></span>
+        <span class="line"></span>
+    </div>
+    <p class="section-subtitle reveal">Decouvrez notre mission, notre vision et notre engagement pour la Bonne Nouvelle</p>
+    <div class="about-grid">
+        <div class="about-image-wrapper reveal">
+            <div class="img-frame">
+                <img src="WhatsApp Image 2026-07-23 at 16.23.20.jpeg" alt="Pasteur de l'Eglise LA MANNE DE VIE">
+                <div class="img-caption">
+                    <h3>Pasteur Principal</h3>
+                    <p>Serviteur de Dieu, porteur de la Bonne Nouvelle</p>
+                </div>
+            </div>
+            <div class="img-badge">Porteurs de la Bonne Nouvelle</div>
+        </div>
+        <div class="about-text reveal">
+            <p class="about-highlight">Qui Sommes-Nous ?</p>
+            <h2>LA MANNE DE VIE</h2>
+            <p><strong>LA MANNE DE VIE</strong> est une eglise chretienne situee a Porto-Novo, au Benin. Nous sommes specialises dans l'annonce de la Bonne Nouvelle de Jesus-Christ, conformement a l'Evangile.</p>
+            <p>Notre mission est de repandre l'Evangile, d'enseigner la parole de Dieu et d'accompagner chaque croyant dans sa croissance spirituelle. Nous croyons en une eglise vivante, dynamique et ouverte a tous, sans distinction.</p>
+            <div class="about-features">
+                <div class="feature-item">
+                    <div class="fi-icon">
+                        <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12zM10 9h8v2h-8zm0 3h4v2h-4zm0-6h8v2h-8z"/></svg>
+                    </div>
+                    <span>Enseignement Biblique</span>
+                </div>
+                <div class="feature-item">
+                    <div class="fi-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    </div>
+                    <span>Vie de Priere</span>
+                </div>
+                <div class="feature-item">
+                    <div class="fi-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z"/></svg>
+                    </div>
+                    <span>Amour & Communaute</span>
+                </div>
+                <div class="feature-item">
+                    <div class="fi-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    </div>
+                    <span>Mission & Evangelisation</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PROGRAMMES ===== -->
+<section class="programs" id="programmes">
+    <h2 class="section-title reveal">Nos Programmes</h2>
+    <div class="section-divider reveal">
+        <span class="line"></span>
+        <span class="diamond"></span>
+        <span class="line"></span>
+    </div>
+    <p class="section-subtitle reveal">Rejoignez-nous pour nos rencontres hebdomadaires et croissez dans la foi</p>
+    <div class="programs-grid">
+        <div class="program-card reveal">
+            <div class="card-accent"></div>
+            <div class="card-icon">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z"/></svg>
+            </div>
+            <h3>Culte du Dimanche</h3>
+            <p class="day-name">Dimanche</p>
+            <div class="time-display">08h â€” 10h</div>
+            <p class="activity-desc">Culte de louange, d'adoration et d'enseignement de la parole</p>
+        </div>
+        <div class="program-card reveal">
+            <div class="card-accent"></div>
+            <div class="card-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            </div>
+            <h3>Soiree de Priere</h3>
+            <p class="day-name">Jeudi</p>
+            <div class="time-display">19h â€” 20h</div>
+            <p class="activity-desc">Intercession, priere collective et combat spirituel</p>
+        </div>
+        <div class="program-card reveal">
+            <div class="card-accent"></div>
+            <div class="card-icon">
+                <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
+            </div>
+            <h3>Evenements Speciaux</h3>
+            <p class="day-name">Toute l'annee</p>
+            <div class="time-display">A votre service</div>
+            <p class="activity-desc">Conferences, seminaires, campagnes d'evangelisation</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PASTEUR ===== -->
+<section class="pastor" id="pasteur">
+    <h2 class="section-title reveal">Notre Pasteur</h2>
+    <div class="section-divider reveal">
+        <span class="line"></span>
+        <span class="diamond"></span>
+        <span class="line"></span>
+    </div>
+    <p class="section-subtitle reveal">Un homme de Dieu au service de la Bonne Nouvelle</p>
+    <div class="pastor-content">
+        <div class="pastor-image reveal">
+            <img src="WhatsApp Image 2026-07-23 at 16.23.20.jpeg" alt="Pasteur de LA MANNE DE VIE">
+        </div>
+        <div class="pastor-info reveal">
+            <h2>Pasteur de LA MANNE DE VIE</h2>
+            <p class="pastor-role">Serviteur de Dieu | Predicateur de la Bonne Nouvelle</p>
+            <p class="pastor-verse">Â« Allez par tout le monde, et prechez la bonne nouvelle a toute la creation. Â» â€” Marc 16:15</p>
+            <p>Le pasteur est un homme appele par Dieu pour annoncer la Bonne Nouvelle et conduire le troupeau du Seigneur. Avec amour et devouement, il enseigne la parole de Dieu et accompagne chaque membre dans son cheminement spirituel.</p>
+            <p>Vous souhaitez echanger avec lui, recevoir des conseils ou une priere ? N'hesitez pas a le contacter directement. Il est la pour vous ecouter, vous conseiller et prier avec vous.</p>
+            <div class="pastor-contact-buttons">
+                <a href="tel:+2290197573929" class="btn btn-phone">
+                    <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    Appeler
+                </a>
+                <a href="https://wa.me/2290197573929" target="_blank" class="btn btn-whatsapp">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    WhatsApp
+                </a>
+                <a href="#" class="btn btn-outline" id="contactPastorBtn">
+                    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/></svg>
+                    Envoyer un Message
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PARTENAIRES ===== -->
+<section class="partners" id="partenaires">
+    <h2 class="section-title reveal">Nos Partenaires</h2>
+    <div class="section-divider reveal">
+        <span class="line"></span>
+        <span class="diamond"></span>
+        <span class="line"></span>
+    </div>
+    <p class="section-subtitle reveal">Ensemble, nous servons Dieu et la communaute pour l'avancement du Royaume</p>
+    <div class="partners-grid">
+        <div class="partner-card reveal">
+            <div class="partner-logo">
+                <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="180" height="60" rx="8" fill="none" stroke="var(--gold)" stroke-width="1.5"/>
+                    <text x="100" y="35" text-anchor="middle" font-family="serif" font-size="14" font-weight="700" fill="#C9A84C">RMIN</text>
+                    <text x="100" y="52" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#666" font-weight="600">BENIN</text>
+                    <line x1="40" y1="58" x2="160" y2="58" stroke="#C9A84C" stroke-width="0.5" opacity="0.5"/>
+                    <text x="100" y="66" text-anchor="middle" font-family="sans-serif" font-size="4.5" fill="#999">RESEAU MINISTERIEL D'INTERCESSION</text>
+                </svg>
+            </div>
+            <h3>RMIN-BENIN</h3>
+            <p class="partner-fullname">Reseau Ministeriel d'Intercession pour la Nation</p>
+            <p>Un reseau de ministres et d'intercesseurs unis pour prier et interceder pour la nation beninoise, oeuvrant pour la transformation spirituelle du pays.</p>
+        </div>
+        <div class="partner-card reveal">
+            <div class="partner-logo">
+                <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="180" height="60" rx="8" fill="none" stroke="var(--gold)" stroke-width="1.5"/>
+                    <text x="100" y="30" text-anchor="middle" font-family="serif" font-size="12" font-weight="700" fill="#C9A84C">Samaritan's</text>
+                    <text x="100" y="46" text-anchor="middle" font-family="serif" font-size="12" font-weight="700" fill="#C9A84C">Purse</text>
+                    <line x1="50" y1="53" x2="150" y2="53" stroke="#C9A84C" stroke-width="0.5" opacity="0.5"/>
+                    <text x="100" y="66" text-anchor="middle" font-family="sans-serif" font-size="5.5" fill="#999">Samaritan's Purse International Relief</text>
+                </svg>
+            </div>
+            <h3>Samaritan's Purse</h3>
+            <p class="partner-fullname">Operation Samaritan's Purse International Relief</p>
+            <p>Organisation humanitaire chretienne internationale qui oeuvre dans le monde entier pour fournir une aide spirituelle et physique aux personnes dans le besoin.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact">
+    <h2 class="section-title reveal">Contactez-Nous</h2>
+    <div class="section-divider reveal">
+        <span class="line"></span>
+        <span class="diamond"></span>
+        <span class="line"></span>
+    </div>
+    <p class="section-subtitle reveal">Nous sommes la pour vous ecouter, vous accompagner et prier avec vous</p>
+    <div class="contact-grid">
+        <div class="reveal">
+            <h3 class="contact-info-title">Nos Coordonnees</h3>
+            <div class="contact-item">
+                <div class="ci-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                </div>
+                <div class="ci-text">
+                    <h4>Adresse</h4>
+                    <p>Benin / Porto-Novo<br>Sohomey</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="ci-icon">
+                    <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                </div>
+                <div class="ci-text">
+                    <h4>Telephone</h4>
+                    <p><a href="tel:+2290197573929">+229 01 97 57 39 29</a></p>
+                    <p><a href="tel:+2290140305483">+229 01 40 30 54 83</a></p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="ci-icon">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+                </div>
+                <div class="ci-text">
+                    <h4>WhatsApp</h4>
+                    <p><a href="https://wa.me/2290197573929" target="_blank">+229 01 97 57 39 29</a></p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="ci-icon">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                </div>
+                <div class="ci-text">
+                    <h4>Email</h4>
+                    <p><a href="mailto:tohounkpinothniel@gmail.com">tohounkpinothniel@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="reveal">
+            <div class="contact-form-wrapper">
+                <h3>Envoyez-nous un message</h3>
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Votre nom *</label>
+                            <input type="text" id="name" placeholder="Entrez votre nom" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Votre email *</label>
+                            <input type="email" id="email" placeholder="Entrez votre email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Votre telephone</label>
+                        <div class="phone-input-wrapper">
+                            <button type="button" class="country-code-btn" id="countryCodeBtn">
+                                <svg class="flag-icon" id="countryFlag" viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="22" height="16" fill="#E8112D"/>
+                                    <rect x="8" y="0" width="4" height="16" fill="#FFD100"/>
+                                    <rect x="10" y="0" width="2" height="16" fill="#008751"/>
+                                </svg>
+                                <span class="code-text" id="countryCodeDisplay">+229</span>
+                                <span class="arrow-down"></span>
+                            </button>
+                            <input type="tel" class="phone-number-input" id="phone" placeholder="XX XX XX XX" autocomplete="tel">
+                            <div class="country-dropdown" id="countryDropdown">
+                                <div class="dropdown-search">
+                                    <input type="text" id="countrySearch" placeholder="Rechercher un pays ou indicatif...">
+                                </div>
+                                <div class="dropdown-options" id="dropdownOptions"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Sujet *</label>
+                        <select id="subject" required>
+                            <option value="">Choisissez un sujet</option>
+                            <option value="info">Demande d'information</option>
+                            <option value="priere">Demande de priere</option>
+                            <option value="pasteur">Contacter le pasteur</option>
+                            <option value="visite">Planifier une visite</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Votre message *</label>
+                        <textarea id="message" placeholder="Ecrivez votre message ici..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                        Envoyer le Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MAP ===== -->
+<div class="map-section">
+    <div class="map-fallback">
+        <div>
+            <div class="map-marker-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            </div>
+            <h3>LA MANNE DE VIE</h3>
+            <p>Benin / Porto-Novo â€” Sohomey</p>
+            <p style="margin-top:0.8rem;font-size:0.85rem;opacity:0.6;">Venez nous rendre visite !</p>
+        </div>
+    </div>
+</div>
+
+<!-- ===== MODAL ===== -->
+<div class="modal-overlay" id="contactPastorModal">
+    <div class="modal-box">
+        <button class="modal-close" id="modalClose">
+            <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+        <h2>Contacter le Pasteur</h2>
+        <p class="modal-desc">Envoyez votre message directement au <strong>Pasteur</strong>. Il vous repondra dans les plus brefs delais.</p>
+        <form id="pastorForm">
+            <div class="form-group">
+                <label for="pname">Votre nom *</label>
+                <input type="text" id="pname" placeholder="Entrez votre nom" required>
+            </div>
+            <div class="form-group">
+                <label for="pemail">Votre email ou telephone *</label>
+                <input type="text" id="pemail" placeholder="Email ou telephone" required>
+            </div>
+            <div class="form-group">
+                <label for="pmessage">Votre message pour le pasteur *</label>
+                <textarea id="pmessage" placeholder="Ecrivez votre message..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                Envoyer au Pasteur
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ===== BACK TO TOP ===== -->
+<button class="back-to-top" id="backToTop">
+    <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+</button>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="footer-grid">
+        <div>
+            <div class="footer-brand">LA MANNE DE VIE <small>Porteurs de la Bonne Nouvelle</small></div>
+            <p>Benin / Porto-Novo â€” Sohomey<br>Â« Allez par tout le monde, et prechez la bonne nouvelle a toute la creation. Â» â€” Marc 16:15</p>
+        </div>
+        <div>
+            <h4>Liens</h4>
+            <ul>
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#a-propos">A Propos</a></li>
+                <li><a href="#programmes">Programmes</a></li>
+                <li><a href="#pasteur">Pasteur</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Contact</h4>
+            <ul>
+                <li><a href="tel:+2290197573929">+229 01 97 57 39 29</a></li>
+                <li><a href="tel:+2290140305483">+229 01 40 30 54 83</a></li>
+                <li><a href="https://wa.me/2290197573929">WhatsApp</a></li>
+                <li><a href="mailto:tohounkpinothniel@gmail.com">Email</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 LA MANNE DE VIE â€” Tous droits reserves. | Â« Porteurs de la Bonne Nouvelle Â»</p>
+    </div>
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+    (function() {
+        'use strict';
+
+        // --- PRELOADER ---
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('preloader').classList.add('hidden');
+            }, 1000);
+        });
+
+        // --- PARTICLES ---
+        (function createParticles() {
+            var container = document.getElementById('particles');
+            if (!container) return;
+            for (var i = 0; i < 30; i++) {
+                var p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.top = (60 + Math.random() * 40) + '%';
+                p.style.animationDelay = (Math.random() * 6) + 's';
+                p.style.animationDuration = (4 + Math.random() * 4) + 's';
+                p.style.width = p.style.height = (2 + Math.random() * 3) + 'px';
+                container.appendChild(p);
+            }
+        })();
+
+        // --- NAVBAR ---
+        var hamburger = document.getElementById('hamburger');
+        var navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('open');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // --- NAVBAR SCROLL ---
+        var navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // --- ACTIVE NAV LINK ---
+        var sections = document.querySelectorAll('section[id]');
+        var navAnchors = document.querySelectorAll('.nav-links a');
+
+        window.addEventListener('scroll', function() {
+            var current = '';
+            sections.forEach(function(section) {
+                var top = section.offsetTop - 150;
+                if (window.scrollY >= top) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navAnchors.forEach(function(a) {
+                a.classList.remove('active');
+                if (a.getAttribute('href') === '#' + current) {
+                    a.classList.add('active');
+                }
+            });
+        });
+
+        // --- SCROLL REVEAL ---
+        function handleReveal() {
+            var reveals = document.querySelectorAll('.reveal');
+            var windowHeight = window.innerHeight;
+            var revealPoint = 80;
+
+            reveals.forEach(function(el) {
+                var revealTop = el.getBoundingClientRect().top;
+                if (revealTop < windowHeight - revealPoint) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+        window.addEventListener('scroll', handleReveal);
+        window.addEventListener('load', handleReveal);
+        handleReveal();
+
+        // --- COUNTER ANIMATION ---
+        function animateCounter(el) {
+            var target = parseInt(el.getAttribute('data-count'));
+            if (!target) return;
+            var current = 0;
+            var increment = Math.ceil(target / 40);
+            var timer = setInterval(function() {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                el.textContent = current;
+            }, 40);
+        }
+
+        var counterObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        var counterEl = document.querySelector('.hero-stat .number[data-count]');
+        if (counterEl) counterObserver.observe(counterEl);
+
+        // --- BACK TO TOP ---
+        var backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 400) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // --- MODAL ---
+        var modal = document.getElementById('contactPastorModal');
+        var contactPastorBtn = document.getElementById('contactPastorBtn');
+        var modalClose = document.getElementById('modalClose');
+
+        if (contactPastorBtn) {
+            contactPastorBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+
+        if (modalClose) {
+            modalClose.addEventListener('click', function() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        }
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // --- TOAST ---
+        function showToast(message, type) {
+            type = type || 'success';
+            var container = document.getElementById('toastContainer');
+            var toast = document.createElement('div');
+            toast.className = 'toast toast-' + type;
+
+            var iconSvg = '';
+            if (type === 'success') {
+                iconSvg = '<svg viewBox="0 0 24 24" class="toast-icon"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
+            } else {
+                iconSvg = '<svg viewBox="0 0 24 24" class="toast-icon"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>';
+            }
+
+            toast.innerHTML = iconSvg + '<span>' + message + '</span>';
+            container.appendChild(toast);
+
+            requestAnimationFrame(function() {
+                toast.classList.add('show');
+            });
+
+            setTimeout(function() {
+                toast.classList.remove('show');
+                setTimeout(function() {
+                    if (toast.parentNode) toast.parentNode.removeChild(toast);
+                }, 400);
+            }, 4000);
+        }
+
+        // --- COUNTRY CODE PHONE INPUT ---
+        var countries = [
+            { name: 'Benin', code: '+229', flag: '<svg viewBox="0 0 22 16"><rect width="22" height="16" fill="#E8112D"/><rect x="8" width="4" height="16" fill="#FFD100"/><rect x="10" width="2" height="16" fill="#008751"/></svg>' },
+            { name: 'Cote d\'Ivoire', code: '+225', flag: '<svg viewBox="0 0 22 16"><rect width="22" height="16" fill="#FFF"/><rect width="7.33" height="16" fill="#F77F00"/><rect x="14.67" width="7.33" height="16" fill="#009E60"/></svg>' },
+            { name: 'Togo', code: '+228', flag: '<svg viewBox="0 0 22 16"><rect width="22" height="16" fill="#FFF"/><rect width="22" height="4" fill="#006A4E"/><rect y="6" width="22" height="4" fill="#006A4E"/><rect y="12" width="22" height="4" fill="#006A4E"/><rect width="8.8" height="16" fill="#D21034"/><polygon points="4.4,2 5.5,5.2 8.8,5.2 6.1,7.3 7.1,10.5 4.4,8.4 1.7,10.5 2.7,7.3 0,5.2 3.3,5.2" fill="#FFD100"/></svg>' },
+            { name: 'Nigeria', code: '+234', flag: '<svg viewBox="0 0 22 16"><rect width="22" height="16" fill="#FFF"/><rect width="7.33" height="16" fill="#008751"/><rect x="14.67" width="7.33" height="16" fill="#008751"/></svg>' },
+            { name: 'Ghana', code: '+233', flag: '<svg viewBox="0 0 22 16"><rect width="22" height="16" fill="#FFD100"/><rect width="22" height="5.33" fill="#E8112D"/><rect y="10.67" width="22" height="5.33" fill="#008751"/><polygon points="11,3 12.4,6.2 15.8,6.2 13,8.4 14.2,11.6 11,9.5 7.8,11.6 9,8.4 6.2,6.2 9.6,6.2" fill="#1A1A1A"/></svg>' },
+            { name: 'Senegal', code: '+221', flag: '<svg viewBox="0 0 22 16"><rect width="22" height="16" fill="#FFF"/><rect width="7.33" height="16" fill="#E11B22"/><rect x="14.67" width="7.33" height="16" fill="#00853F"/><polygon points="11,3 12.4,6.2 15.8,6.2 13,8.4 14.2,11.6 11,9.5 7.8,11.6 9,8.4 6.2,6.2 9.6,6.2" fill="#00853F"/></svg>' },
+            { name: 'Congo (RDC)', code: '+243', flag: '<svg viewBox="0 0 22 16"><rect width="22" height="16" fill="#007FFF"/><polygon points="0,0 8,0 22,12 22,16 14,16 0,4" fill="#FFD100"/><polygon points="0,0 6,0 22,14 22,16 16,16 0,2" fill="#E8112D"/></svg>' },
+            { name: 'Cameroun', code: '+237', flag: '<svg viewBox="0 0 22 16"><rect width="22" height="16" fill="#FFF"/><rect width="7.33" height="16" fill="#007A5E"/><rect x="14.67" width="7.33" height="16" fill="#CE1126"/><polygon points="11,3 12.4,6.2 15.8,6.2 13,8.4 14.2,11.6 11,9.5 7.8,11.6 9,8.4 6.2,6.2 9.6,6.2" fill="#FFD100"/></svg>' },
+            { name: 'Burkina Faso', code: '+226', flag: '<svg viewBox="0 0 22 16"><rect y="8" width="22" height="8" fill="#009E60"/><rect width="22" height="8" fill="#EF2B2D"/><polygon points="11,3 12.4,6.2 15.8,6.2 13,8.4 14.2,11.6 11,9.5 7.8,11.6 9,8.4 6.2,6.2 9.6,6.2" fill="#FFD100"/></svg>' },
+            { name: 'Niger', code: '+227', flag: '<svg viewBox="0 0 22 16"><rect width="22" height="16" fill="#FFF"/><rect width="22" height="5.33" fill="#E05206"/><rect y="10.67" width="22" height="5.33" fill="#0DB02B"/><circle cx="11" cy="8" r="2.5" fill="#E05206"/></svg>' },
+            { name: 'France', code: '+33', flag: '<svg viewBox="0 0 22 16"><rect width="22" height="16" fill="#FFF"/><rect width="7.33" height="16" fill="#002395"/><rect x="14.67" width="7.33" height="16" fill="#ED2939"/></svg>' },
+            { name: 'Belgique', code: '+32', flag: '<svg viewBox="0 0 22 16"><rect width="22" height="16" fill="#FFF"/><rect width="7.33" height="16" fill="#1A1A1A"/><rect x="14.67" width="7.33" height="16" fill="#E8112D"/></svg>' },
+            { name: 'Canada', code: '+1', flag: '<svg viewBox="0 0 22 16"><rect width="22" height="16" fill="#E8112D"/><rect x="3" y="2" width="16" height="12" fill="#FFF"/><polygon points="11,3 12.2,5.5 14.5,5.5 12.7,7.2 13.5,9.8 11,8.3 8.5,9.8 9.3,7.2 7.5,5.5 9.8,5.5" fill="#E8112D"/></svg>' },
+            { name: 'Etats-Unis', code: '+1', flag: '<svg viewBox="0 0 22 16"><rect width="22" height="16" fill="#E8112D"/><rect y="1.45" width="22" height="1.45" fill="#FFF"/><rect y="4.36" width="22" height="1.45" fill="#FFF"/><rect y="7.27" width="22" height="1.45" fill="#FFF"/><rect y="10.18" width="22" height="1.45" fill="#FFF"/><rect y="13.09" width="22" height="1.45" fill="#FFF"/><rect width="8.8" height="8" fill="#3C3B6E"/><text x="4.4" y="6" text-anchor="middle" font-size="6" fill="#FFF" font-weight="bold">USA</text></svg>' },
+            { name: 'Royaume-Uni', code: '+44', flag: '<svg viewBox="0 0 22 16"><rect width="22" height="16" fill="#012169"/><rect x="9" width="4" height="16" fill="#FFF"/><rect y="6" width="22" height="4" fill="#FFF"/><rect x="9" y="-2" width="4" height="20" fill="#E8112D" stroke="#E8112D" stroke-width="1"/><rect y="5" width="22" height="6" fill="#E8112D"/></svg>' }
+        ];
+
+        var defaultCountry = countries[0];
+        var selectedCountry = defaultCountry;
+        var countryCodeBtn = document.getElementById('countryCodeBtn');
+        var countryFlag = document.getElementById('countryFlag');
+        var countryCodeDisplay = document.getElementById('countryCodeDisplay');
+        var countryDropdown = document.getElementById('countryDropdown');
+        var dropdownOptions = document.getElementById('dropdownOptions');
+        var countrySearch = document.getElementById('countrySearch');
+        var phoneInput = document.getElementById('phone');
+
+        function updateCountryDisplay(country) {
+            selectedCountry = country;
+            countryFlag.outerHTML = country.flag.replace('<svg', '<svg class="flag-icon" id="countryFlag"');
+            countryFlag = document.getElementById('countryFlag');
+            countryCodeDisplay.textContent = country.code;
+            countryCodeBtn.classList.remove('active');
+            countryDropdown.classList.remove('open');
+            renderCountryOptions();
+        }
+
+        function renderCountryOptions(filter) {
+            filter = filter || '';
+            var html = '';
+            var lowerFilter = filter.toLowerCase();
+            countries.forEach(function(c) {
+                var match = c.name.toLowerCase().indexOf(lowerFilter) !== -1 || c.code.indexOf(filter) !== -1;
+                if (!match && filter) return;
+                var isSelected = c.code === selectedCountry.code && c.name === selectedCountry.name;
+                html += '<div class="country-option' + (isSelected ? ' selected' : '') + '" data-code="' + c.code + '" data-name="' + c.name + '">' +
+                    c.flag.replace('<svg', '<svg class="flag-icon"') +
+                    '<span class="country-name">' + c.name + '</span>' +
+                    '<span class="country-code">' + c.code + '</span></div>';
+            });
+            dropdownOptions.innerHTML = html || '<div class="country-option" style="opacity:0.5;cursor:default">Aucun pays trouve</div>';
+
+            dropdownOptions.querySelectorAll('.country-option').forEach(function(opt) {
+                if (opt.style.cursor === 'default') return;
+                opt.addEventListener('click', function() {
+                    var country = countries.find(function(c) {
+                        return c.code === opt.getAttribute('data-code') && c.name === opt.getAttribute('data-name');
+                    });
+                    if (country) updateCountryDisplay(country);
+                });
+            });
+        }
+
+        countryCodeBtn.addEventListener('click', function() {
+            var isOpen = countryDropdown.classList.contains('open');
+            countryDropdown.classList.toggle('open');
+            countryCodeBtn.classList.toggle('active');
+            if (!isOpen) {
+                countrySearch.value = '';
+                renderCountryOptions();
+                setTimeout(function() { countrySearch.focus(); }, 100);
+            }
+        });
+
+        countrySearch.addEventListener('input', function() {
+            renderCountryOptions(this.value);
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!countryCodeBtn.contains(e.target) && !countryDropdown.contains(e.target)) {
+                countryDropdown.classList.remove('open');
+                countryCodeBtn.classList.remove('active');
+            }
+        });
+
+        // Auto-detect country when typing +XXX
+        phoneInput.addEventListener('input', function() {
+            var val = this.value.trim();
+            var match = val.match(/^\+?(\d{1,4})/);
+            if (match) {
+                var partial = '+' + match[1];
+                var found = countries.find(function(c) {
+                    return c.code === partial;
+                });
+                if (found && (found.code !== selectedCountry.code || found.name !== selectedCountry.name)) {
+                    updateCountryDisplay(found);
+                }
+            }
+        });
+
+        phoneInput.addEventListener('keydown', function(e) {
+            if (e.key === '+' && this.selectionStart === 0) {
+                // Allow + at start
+            }
+        });
+
+        // --- CONTACT FORM ---
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var name = document.getElementById('name').value.trim();
+            var email = document.getElementById('email').value.trim();
+            var subject = document.getElementById('subject').value;
+            var message = document.getElementById('message').value.trim();
+
+            if (!name || !email || !subject || !message) {
+                showToast('Veuillez remplir tous les champs obligatoires.', 'error');
+                return;
+            }
+
+            var phoneVal = phoneInput.value.trim();
+            var fullPhone = phoneVal ? selectedCountry.code + ' ' + phoneVal : 'Non fourni';
+
+            var mailtoLink = 'mailto:tohounkpinothniel@gmail.com?subject=' +
+                encodeURIComponent('Contact Eglise - ' + subject + ' - ' + name) +
+                '&body=' + encodeURIComponent(
+                    'Nom: ' + name + '\n' +
+                    'Email: ' + email + '\n' +
+                    'Telephone: ' + fullPhone + '\n\n' +
+                    'Message:\n' + message
+                );
+
+            window.location.href = mailtoLink;
+            showToast('Message envoye avec succes ! Nous vous repondrons bientot.', 'success');
+            this.reset();
+        });
+
+        // --- PASTOR FORM ---
+        document.getElementById('pastorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var name = document.getElementById('pname').value.trim();
+            var contact = document.getElementById('pemail').value.trim();
+            var message = document.getElementById('pmessage').value.trim();
+
+            if (!name || !contact || !message) {
+                showToast('Veuillez remplir tous les champs.', 'error');
+                return;
+            }
+
+            var mailtoLink = 'mailto:tohounkpinothniel@gmail.com?subject=' +
+                encodeURIComponent('Message pour le Pasteur - ' + name) +
+                '&body=' + encodeURIComponent(
+                    'De: ' + name + '\n' +
+                    'Contact: ' + contact + '\n\n' +
+                    'Message au Pasteur:\n' + message
+                );
+
+            window.location.href = mailtoLink;
+            showToast('Message envoye au pasteur avec succes !', 'success');
+            this.reset();
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // --- SMOOTH SCROLL ---
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                var href = this.getAttribute('href');
+                if (!href || href === '#') return;
+                e.preventDefault();
+                var target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+    })();
+</script>
+
+</body>
+</html>
